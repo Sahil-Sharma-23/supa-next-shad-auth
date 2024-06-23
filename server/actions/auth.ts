@@ -21,24 +21,25 @@ export async function loginAction(formData: FormData) {
     // return some error data to show on UI
   }
 
-  try {
-    const supabase = createClient();
+  console.log("Form Data: ", data);  // DEBUG
 
-    const {error} = await supabase.auth.signInWithPassword(data)
-    if (error) {
-      console.log("Supabase login error: ", error); // DEBUG
-      // show some error message
-    }
+  // try {
+  //   const supabase = createClient();
 
-    revalidatePath('/', 'layout')
-    redirect('/account')
-  } catch (error) {
-    console.error("Unexpected error: ", error); // DEBUG
-  }
+  //   const {error} = await supabase.auth.signInWithPassword(data)
+  //   if (error) {
+  //     console.log("Supabase login error: ", error); // DEBUG
+  //     // show some error message
+  //   }
+
+  //   revalidatePath('/', 'layout')
+  //   redirect('/account')
+  // } catch (error) {
+  //   console.error("Unexpected error: ", error); // DEBUG
+  // }
 }
 
 export async function signUpAction(formData: FormData) {
-  // const supabase = createClient()
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -54,12 +55,17 @@ export async function signUpAction(formData: FormData) {
     console.log("Invalid email or password"); // DEBUG
   }
 
-  // const { error } = await supabase.auth.signUp(data)
-
-  // if (error) {
-  //   redirect('/error')
-  // }
-
-  // revalidatePath('/', 'layout')
-  // redirect('/account')
+  try {
+    // const supabase = createClient();
+    // const { error } = await supabase.auth.signUp(data)
+  
+    // if (error) {
+    //   redirect('/error')
+    // }
+  
+    // revalidatePath('/', 'layout')
+    // redirect('/account')
+  } catch (error) {
+    // console.log(error); // DEBUG
+  }
 }
