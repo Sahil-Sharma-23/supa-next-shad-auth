@@ -6,12 +6,13 @@ import { Label } from "@/components/ui/label";
 import { signUpAction } from "@/server/actions/auth";
 import { Separator } from "@/components/ui/separator";
 import { GoogleLogo } from "@/components/Icons";
-import SignupSubmitButton from "@/components/SignupSubmitButton";
+import SubmitButton from "@/components/SubmitButton";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function SingUpPage() {
   return (
-    <div className="w-full lg:grid lg:grid-cols-2 min-h-screen">
-      <div className="flex items-center justify-center py-12">
+    <div className="w-full lg:grid lg:grid-cols-8 min-h-screen">
+      <div className="flex items-center justify-center py-12 col-span-5">
         <div className="mx-auto grid max-w-lg w-full gap-6 px-4">
           <div className="grid gap-2 text-center">
             <h1 className="text-4xl font-bold text-left">
@@ -61,13 +62,7 @@ export default function SingUpPage() {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
+              <PasswordInput />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
@@ -79,11 +74,14 @@ export default function SingUpPage() {
                 required
               />
             </div>
-            <SignupSubmitButton />
+            <SubmitButton title="Sign Up" />
           </form>
           <div className="text-center text-sm space-y-2">
             Already have an account?&nbsp;
-            <Link href="/auth/login" className="underline">
+            <Link
+              href="/auth/login"
+              className="hover:text-muted-foreground duration-300 transition-all"
+            >
               Login here!
             </Link>
             <p>
@@ -105,9 +103,9 @@ export default function SingUpPage() {
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="hidden bg-muted lg:block col-span-3">
         <Image
-          src="/placeholder.svg"
+          src="/dark-pattern.svg"
           alt="Image"
           width="1920"
           height="1080"
