@@ -17,6 +17,28 @@ export default function SingUpPage() {
             </p>
           </div>
           <form action={signUpAction} className="grid gap-4">
+            <div className="flex w-full gap-2">
+              <div className="flex-1 grid gap-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  name="firstName"
+                  placeholder="Jane"
+                  required
+                />
+              </div>
+              <div className="flex-1 grid gap-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  name="lastName"
+                  placeholder="Doe"
+                  required
+                />
+              </div>
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -30,12 +52,6 @@ export default function SingUpPage() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                {/* <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link> */}
               </div>
               <Input id="password" type="password" name="password" required />
               <Label htmlFor="confirmPassword">Confirm Password</Label>

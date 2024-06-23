@@ -69,3 +69,15 @@ export async function signUpAction(formData: FormData) {
     // console.log(error); // DEBUG
   }
 }
+
+export async function resetPasswordAction(formData:FormData) {
+  const email = formData.get("email") as string;
+
+  if (!validateEmail(email)) {
+    console.log("Invalid email address"); // DEBUG
+  }
+  console.log("User email for password reset: ", email);  // DEBUG
+
+  // Send link through supabase to reset password
+
+}
