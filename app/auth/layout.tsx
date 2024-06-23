@@ -8,9 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <div className="min-h-screen w-full">
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="h-full w-full">{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
