@@ -57,14 +57,6 @@ export default function LoginPage() {
                   Forgot your password?
                 </Link>
               </div>
-              {/* <Input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              /> */}
-
               <PasswordInput />
             </div>
             <SubmitButton title="Login" />
