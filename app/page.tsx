@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -11,6 +12,7 @@ export default function Home() {
         <Link href={"/auth/signup"}>
           <Button>Sign Up</Button>
         </Link>
+        <ModeToggle />
       </div>
     </div>
   );
