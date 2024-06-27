@@ -7,8 +7,7 @@ import { Label } from "@/components/ui/label";
 import { loginAction } from "@/server/actions/auth";
 import { GoogleLogo } from "@/components/Icons";
 import { Separator } from "@/components/ui/separator";
-import SubmitButton from "@/components/SubmitButton";
-import PasswordInput from "@/components/PasswordInput";
+import LoginForm from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
   return (
@@ -36,31 +35,7 @@ export default function LoginPage() {
             <span>Continue with google</span>
           </Button>
           <Separator />
-          <form action={loginAction} className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/auth/forgot-password"
-                  className="ml-auto inline-block text-sm underline hover:text-muted-foreground duration-300 transition-all"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <PasswordInput />
-            </div>
-            <SubmitButton title="Login" />
-          </form>
+          <LoginForm />
           <div className="text-center text-sm">
             Already have an account?&nbsp;
             <Link

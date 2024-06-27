@@ -1,51 +1,66 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import {
   checkIfPasswordsMatch,
   validateEmail,
   validatePassword,
 } from "@/lib/helpers";
-import { SignupFormSchema, SignupFormType } from "@/lib/schema";
+import { LoginFormType, SignupFormType } from "@/lib/schema";
+import { ServerActionReponse } from "@/types";
 
-export async function loginAction(formData: FormData) {
+export async function loginAction(
+  formData: LoginFormType
+): Promise<ServerActionReponse> {
   console.log("Into login action"); // DEBUG
-  const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-  };
-
   // Validate data
-  if (!validateEmail(data.email)) {
-    console.log("Invalid email");
-    // return some error data to show on UI
+  if (!validateEmail(formData.email)) {
+    console.log("Invalid email"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Invalid email address.",
+    };
   }
-  if (!validatePassword(data.password)) {
-    console.log("Invalid password");
-    // return some error data to show on UI
-  }
-
-  console.log("Form Data: ", data); // DEBUG
+  // if (!validatePassword(formData.password)) {
+  //   console.log("Invalid password"); // DEBUG
+  //   return {
+  //     statusCode: 401,
+  //     status: "NOT OK",
+  //     message: "Invalid pasword.",
+  //   };
+  // }
 
   try {
     const supabase = createClient();
 
-    const { error } = await supabase.auth.signInWithPassword(data);
+    const { error } = await supabase.auth.signInWithPassword(formData);
     if (error) {
       console.log("Supabase login error: ", error); // DEBUG
-      // show some error message
+      return {
+        statusCode: 402,
+        status: "NOT OK",
+        message: "Can't login, TRY AGAIN!",
+      };
     }
-
-    revalidatePath("/", "layout");
-    redirect("/auth/protected");
   } catch (error) {
     console.error("Unexpected error: ", error); // DEBUG
+    return {
+      statusCode: 404,
+      status: "NOT OK",
+      message: "Internal server error",
+    };
   }
+  return {
+    statusCode: 200,
+    status: "OK",
+    message: "user logged in",
+  };
 }
 
-export async function signUpAction(formData: SignupFormType) {
+export async function signUpAction(
+  formData: SignupFormType
+): Promise<ServerActionReponse> {
   console.log("Into sign up action"); // DEBUG
 
   // Valdidate fields
