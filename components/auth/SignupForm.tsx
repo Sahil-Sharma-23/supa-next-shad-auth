@@ -5,11 +5,9 @@ import { Input } from "../ui/input";
 import { SignupFormSchema, SignupFormType } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,10 +16,13 @@ import {
 import { Button } from "../ui/button";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { signUpAction } from "@/server/actions/auth";
+import { useRouter } from "next13-progressbar";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const router = useRouter();
 
   const form = useForm<SignupFormType>({
     resolver: zodResolver(SignupFormSchema),
@@ -36,9 +37,13 @@ export default function SignupForm() {
 
   async function onSubmit(values: SignupFormType) {
     setIsFormLoading(true); // Set form state to loading
-
     const signupResponse = await signUpAction(values);
     console.log("Sign up response: ", signupResponse); // DEBUG
+    if (signupResponse.statusCode === 200) {
+      router.replace("/auth/registration-email-sent");
+    } else {
+      setMessage(signupResponse.message);
+    }
     setIsFormLoading(false);
   }
 
@@ -159,6 +164,8 @@ export default function SignupForm() {
             )}
           />
 
+          {message ? <p className="text-red-600">{message}</p> : null}
+
           <Button type="submit" disabled={isFormLoading}>
             {isFormLoading ? (
               <span className="flex gap-2">
@@ -171,56 +178,6 @@ export default function SignupForm() {
           </Button>
         </form>
       </Form>
-
-      {/* <form action={onSubmit} className="grid gap-4">
-        <div className="flex w-full gap-2">
-          <div className="flex-1 grid gap-2">
-            <Label htmlFor="firstName">First Name</Label>
-            <Input
-              id="firstName"
-              type="text"
-              name="firstName"
-              placeholder="Jane"
-              required
-            />
-          </div>
-          <div className="flex-1 grid gap-2">
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input
-              id="lastName"
-              type="text"
-              name="lastName"
-              placeholder="Doe"
-              required
-            />
-          </div>
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="m@example.com"
-            required
-          />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <PasswordInput />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            required
-          />
-        </div>
-        <SubmitButton title="Sign Up" />
-      </form> */}
     </>
   );
 }

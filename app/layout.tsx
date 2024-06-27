@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ViewTransitions } from "next-view-transitions";
+import ProgressProvider from "@/providers/ProgressProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <ProgressProvider>{children}</ProgressProvider>
           </ThemeProvider>
         </body>
       </html>
