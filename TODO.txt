@@ -1,1 +1,4 @@
 1. Use react-hook-form and zod for all forms (login, signup, reset password, set new password)
+2. Go through all forms texts and code details
+3. Extract password input field from all forms (quite repetetive)
+4. Test all form functionalities

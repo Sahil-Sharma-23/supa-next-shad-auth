@@ -6,7 +6,11 @@ import {
   validateEmail,
   validatePassword,
 } from "@/lib/helpers";
-import { LoginFormType, SignupFormType } from "@/lib/schema";
+import {
+  LoginFormType,
+  SignupFormType,
+  UpdatePasswordFormType,
+} from "@/lib/schema";
 import { ServerActionReponse } from "@/types";
 
 export async function loginAction(
@@ -144,30 +148,55 @@ export async function resetPasswordAction(formData: FormData) {
   }
 }
 
-export async function updatePassword(formData: FormData) {
+export async function updatePassword(
+  formData: UpdatePasswordFormType
+): Promise<ServerActionReponse> {
   console.log("Into update password action"); // DEBUG
-  const password = formData.get("password") as string;
-  const confirmPassword = formData.get("confirmPassword") as string;
-
-  if (!checkIfPasswordsMatch(password, confirmPassword)) {
+  if (!checkIfPasswordsMatch(formData.password, formData.confirmPassword)) {
     console.log("Password do not match"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Password do not match.",
+    };
   }
   if (!validatePassword) {
     console.log("Password pattern not valid"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Invalid password.",
+    };
   }
 
   try {
     const supabase = createClient();
 
     const { data, error } = await supabase.auth.updateUser({
-      password: password,
+      password: formData.password,
     });
 
     if (error) {
       console.log("Some error occured while update user password"); // DEBUG
+      return {
+        statusCode: 402,
+        status: "NOT OK",
+        message: "Couldn't update password. TRY AGAIN!",
+      };
     }
     console.log("Update user req data : ", data); // DEBUG
   } catch (error) {
-    console.log("Error: ", error);
+    console.log("Error: ", error); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Internal server error",
+    };
   }
+
+  return {
+    statusCode: 200,
+    status: "OK",
+    message: "Password updated",
+  };
 }

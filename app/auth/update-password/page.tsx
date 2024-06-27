@@ -1,11 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { resetPasswordAction } from "@/server/actions/auth";
 import { Separator } from "@/components/ui/separator";
-import PasswordInput from "@/components/PasswordInput";
-import SubmitButton from "@/components/SubmitButton";
+import UpdatePasswordForm from "@/components/auth/UpdatePasswordForm";
 
 export default function UpdatePasswordPage() {
   return (
@@ -32,23 +28,7 @@ export default function UpdatePasswordPage() {
               </p>
             </div>
             <Separator />
-            <form action={resetPasswordAction} className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <PasswordInput />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  required
-                />
-              </div>
-              <SubmitButton title="Update Password" />
-            </form>
+            <UpdatePasswordForm />
           </div>
         </div>
       </div>
