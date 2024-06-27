@@ -1,13 +1,9 @@
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { signUpAction } from "@/server/actions/auth";
 import { Separator } from "@/components/ui/separator";
 import { GoogleLogo } from "@/components/Icons";
-import SubmitButton from "@/components/SubmitButton";
-import PasswordInput from "@/components/PasswordInput";
+import SignupForm from "@/components/auth/SignupForm";
 
 export default function SingUpPage() {
   return (
@@ -27,55 +23,9 @@ export default function SingUpPage() {
             <span>Continue with google</span>
           </Button>
           <Separator />
-          <form action={signUpAction} className="grid gap-4">
-            <div className="flex w-full gap-2">
-              <div className="flex-1 grid gap-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  type="text"
-                  name="firstName"
-                  placeholder="Jane"
-                  required
-                />
-              </div>
-              <div className="flex-1 grid gap-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  type="text"
-                  name="lastName"
-                  placeholder="Doe"
-                  required
-                />
-              </div>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
-              <PasswordInput />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                required
-              />
-            </div>
-            <SubmitButton title="Sign Up" />
-          </form>
+
+          <SignupForm />
+
           <div className="text-center text-sm space-y-2">
             Already have an account?&nbsp;
             <Link

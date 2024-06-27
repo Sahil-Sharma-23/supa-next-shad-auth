@@ -1,0 +1,1 @@
+1. Use react-hook-form and zod for all forms (login, signup, reset password, set new password)

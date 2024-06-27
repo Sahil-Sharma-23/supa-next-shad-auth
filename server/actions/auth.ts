@@ -8,6 +8,7 @@ import {
   validateEmail,
   validatePassword,
 } from "@/lib/helpers";
+import { SignupFormSchema, SignupFormType } from "@/lib/schema";
 
 export async function loginAction(formData: FormData) {
   console.log("Into login action"); // DEBUG
@@ -44,45 +45,68 @@ export async function loginAction(formData: FormData) {
   }
 }
 
-export async function signUpAction(formData: FormData) {
+export async function signUpAction(formData: SignupFormType) {
   console.log("Into sign up action"); // DEBUG
-  const data = {
-    firstName: formData.get("firstName") as string,
-    lastName: formData.get("lastName") as string,
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-    confirmPassword: formData.get("confirmPassword") as string,
-  };
-  console.log("Form data: ", data); // DEBUG
 
   // Valdidate fields
-  if (!checkIfPasswordsMatch(data.password, data.confirmPassword)) {
-    console.log("Passwords do not match!"); // DEBUG
+  if (!formData.firstName || !formData.lastName) {
+    console.log("firstName or lastName empty"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "First name and last name can't be empty.",
+    };
   }
   if (!validateEmail || !validatePassword) {
     console.log("Invalid email or password"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Invalid email or password",
+    };
+  }
+  if (!checkIfPasswordsMatch(formData.password, formData.confirmPassword)) {
+    console.log("Passwords do not match!"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Passwords do not match",
+    };
   }
 
   try {
     const supabase = createClient();
     const { error } = await supabase.auth.signUp({
-      email: data.email,
-      password: data.password,
+      email: formData.email,
+      password: formData.password,
       options: {
         data: {
-          firstName: data.firstName,
-          lastName: data.lastName,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
         },
       },
     });
     if (error) {
       console.log("Supabase Error: ", error); // DEBUG
+      return {
+        statusCode: 402,
+        status: "NOT OK",
+        message: "Can't create user. TRY AGAIN!",
+      };
     }
-
-    redirect("/auth/protected");
   } catch (error) {
     console.log("Catch block caught error: ", error); // DEBUG
+    return {
+      statusCode: 404,
+      status: "NOT OK",
+      message: "Internal server error",
+    };
   }
+  return {
+    statusCode: 200,
+    status: "OK",
+    message: "User registered.",
+  };
 }
 
 export async function resetPasswordAction(formData: FormData) {

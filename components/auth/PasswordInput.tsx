@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function PasswordInput() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
