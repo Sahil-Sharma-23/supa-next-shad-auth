@@ -1,5 +1,5 @@
 1. Use react-hook-form and zod for all forms: DONE
-2. Go through all forms texts and code details
+2. Go through all forms texts and code details: DONE
 3. Extract password input field from all forms (quite repetetive): DONE
 4. Test all form functionalities
 5. Show email verified page

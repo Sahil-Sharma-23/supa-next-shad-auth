@@ -21,10 +21,10 @@ export default function ForgotPasswordPage() {
         <div className="mx-auto grid max-w-lg w-full gap-6 px-4">
           <div className="grid gap-2 text-center">
             <h1 className="text-4xl font-bold text-left">
-              Reset your password
+              Reset Your Password 🔒
             </h1>
             <p className="text-balance text-left text-muted-foreground">
-              Enter your email to continue.
+              🚀 Get Back on Track in No Time!
             </p>
           </div>
           <Separator />
@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
             Remember your password?&nbsp;
             <Link
               href="/auth/signup"
-              className="hover:text-muted-foreground duration-300 transition-all"
+              className="hover:text-muted-foreground hover:underline duration-300 transition-all"
             >
               Login here!
             </Link>

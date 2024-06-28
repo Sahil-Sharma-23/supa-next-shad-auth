@@ -22,14 +22,14 @@ export default function LoginPage() {
       <div className="flex items-center justify-center py-12 col-span-5">
         <div className="mx-auto grid max-w-lg w-full gap-6 px-4">
           <div className="grid gap-2 text-center">
-            <h1 className="text-5xl font-bold text-left">Hi there👋</h1>
+            <h1 className="text-5xl font-bold text-left">Welcome Back! 👋</h1>
             <p className="text-balance text-left text-muted-foreground">
-              Enter your email and password to continue.
+              Enter Your Credentials to Proceed
             </p>
           </div>
           <Button variant={"outline"} className="space-x-2">
             <GoogleLogo />
-            <span>Continue with google</span>
+            <span>Continue with Google</span>
           </Button>
           <Separator />
           <LoginForm />
@@ -37,7 +37,7 @@ export default function LoginPage() {
             Already have an account?&nbsp;
             <Link
               href="/auth/signup"
-              className="hover:text-muted-foreground duration-300 transition-all"
+              className="hover:text-muted-foreground hover:underline duration-300 transition-all"
             >
               Sign up here!
             </Link>

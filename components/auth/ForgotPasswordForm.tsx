@@ -16,8 +16,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { ServerActionReponse } from "@/types";
-import { Button } from "../ui/button";
-import { LoaderCircle } from "lucide-react";
 import SubmitButton from "./SubmitButton";
 
 export default function ForgotPasswordForm() {

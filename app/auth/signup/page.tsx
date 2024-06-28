@@ -12,10 +12,10 @@ export default function SingUpPage() {
         <div className="mx-auto grid max-w-lg w-full gap-6 px-4">
           <div className="grid gap-2 text-center">
             <h1 className="text-4xl font-bold text-left">
-              Create your account
+              🌟 Ready to Be Awesome?
             </h1>
             <p className="text-balance text-muted-foreground text-left">
-              Enter your email and create a strong password to Sign up.
+              Create Your Account and Dive In 🌟
             </p>
           </div>
           <Button variant={"outline"} className="space-x-2">
@@ -30,7 +30,7 @@ export default function SingUpPage() {
             Already have an account?&nbsp;
             <Link
               href="/auth/login"
-              className="hover:text-muted-foreground duration-300 transition-all"
+              className="hover:text-muted-foreground hover:underline duration-300 transition-all"
             >
               Login here!
             </Link>

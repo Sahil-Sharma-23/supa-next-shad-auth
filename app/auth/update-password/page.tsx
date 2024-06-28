@@ -21,10 +21,10 @@ export default function UpdatePasswordPage() {
           <div className="mx-auto grid max-w-lg w-full gap-6 px-4">
             <div className="grid gap-2 text-center">
               <h1 className="text-4xl font-bold text-left">
-                Create new password
+                Password Makeover 🔄
               </h1>
               <p className="text-balance text-left text-muted-foreground">
-                Keep your password handy next time.
+                ✨ Freshen Up Your Security with a New Password
               </p>
             </div>
             <Separator />
