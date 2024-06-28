@@ -18,6 +18,7 @@ import { Input } from "../ui/input";
 import { ServerActionReponse } from "@/types";
 import { Button } from "../ui/button";
 import { LoaderCircle } from "lucide-react";
+import SubmitButton from "./SubmitButton";
 
 export default function ForgotPasswordForm() {
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
@@ -66,16 +67,7 @@ export default function ForgotPasswordForm() {
 
           {message ? <p className="text-red-600">{message}</p> : null}
 
-          <Button type="submit" disabled={isFormLoading}>
-            {isFormLoading ? (
-              <span className="flex gap-2">
-                <LoaderCircle className="animate-spin" />
-                <span>Send reset email</span>
-              </span>
-            ) : (
-              <span>Send reset email</span>
-            )}
-          </Button>
+          <SubmitButton loading={isFormLoading} buttonTitle="Send Reset Link" />
         </form>
       </Form>
     </>

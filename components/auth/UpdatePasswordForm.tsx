@@ -14,11 +14,10 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { LoaderCircle } from "lucide-react";
 import { ServerActionReponse } from "@/types";
 import { updatePasswordFormSchema, UpdatePasswordFormType } from "@/lib/schema";
 import HookFormPasswordInput from "./HookFormPasswordInput";
+import SubmitButton from "./SubmitButton";
 
 export default function UpdatePasswordForm() {
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
@@ -71,16 +70,7 @@ export default function UpdatePasswordForm() {
 
           {message ? <p className="text-red-600">{message}</p> : null}
 
-          <Button type="submit" disabled={isFormLoading}>
-            {isFormLoading ? (
-              <span className="flex gap-2">
-                <LoaderCircle className="animate-spin" />
-                <span>Update Password</span>
-              </span>
-            ) : (
-              <span>Update Password</span>
-            )}
-          </Button>
+          <SubmitButton loading={isFormLoading} buttonTitle="Update Password" />
         </form>
       </Form>
     </>

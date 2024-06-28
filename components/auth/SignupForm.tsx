@@ -13,12 +13,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "../ui/button";
-import { LoaderCircle } from "lucide-react";
 import { signUpAction } from "@/server/actions/auth";
 import { useRouter } from "next13-progressbar";
 import { ServerActionReponse } from "@/types";
 import HookFormPasswordInput from "./HookFormPasswordInput";
+import SubmitButton from "./SubmitButton";
 
 export default function SignupForm() {
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
@@ -126,16 +125,7 @@ export default function SignupForm() {
 
           {message ? <p className="text-red-600">{message}</p> : null}
 
-          <Button type="submit" disabled={isFormLoading}>
-            {isFormLoading ? (
-              <span className="flex gap-2">
-                <LoaderCircle className="animate-spin" />
-                <span>Get Started</span>
-              </span>
-            ) : (
-              <span>Get Started</span>
-            )}
-          </Button>
+          <SubmitButton loading={isFormLoading} buttonTitle="Get Started" />
         </form>
       </Form>
     </>
