@@ -14,13 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
-import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { signUpAction } from "@/server/actions/auth";
 import { useRouter } from "next13-progressbar";
 import { ServerActionReponse } from "@/types";
+import HookFormPasswordInput from "./HookFormPasswordInput";
 
 export default function SignupForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const router = useRouter();
@@ -104,48 +104,7 @@ export default function SignupForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      placeholder="password"
-                      type={`${showPassword ? "text" : "password"}`}
-                      {...field}
-                    />
-                    <span className="absolute top-0 right-1">
-                      {showPassword ? (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <Eye className="opacity-80" />
-                        </Button>
-                      ) : (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <EyeOff className="opacity-80" />
-                        </Button>
-                      )}
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <HookFormPasswordInput form={form} />
 
           <FormField
             control={form.control}
@@ -171,7 +130,7 @@ export default function SignupForm() {
             {isFormLoading ? (
               <span className="flex gap-2">
                 <LoaderCircle className="animate-spin" />
-                <span>Getting Started...</span>
+                <span>Get Started</span>
               </span>
             ) : (
               <span>Get Started</span>

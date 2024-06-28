@@ -16,12 +16,11 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { ServerActionReponse } from "@/types";
-import { Link } from "next-view-transitions";
+import HookFormPasswordInput from "./HookFormPasswordInput";
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const router = useRouter();
@@ -65,60 +64,8 @@ export default function LoginForm() {
               </div>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex justify-between items-center">
-                  <FormLabel>Password</FormLabel>
-                  <Link
-                    href={"/auth/forgot-password"}
-                    className="text-sm text-muted-foreground hover:text-primary hover:underline  duration-300 transition-all"
-                  >
-                    Forgot Password?
-                  </Link>
-                </div>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      placeholder="password"
-                      type={`${showPassword ? "text" : "password"}`}
-                      {...field}
-                    />
-                    <span className="absolute top-0 right-1">
-                      {showPassword ? (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <Eye className="opacity-80" />
-                        </Button>
-                      ) : (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <EyeOff className="opacity-80" />
-                        </Button>
-                      )}
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
+          <HookFormPasswordInput form={form} includeForgotPasswordLink />
           {message ? <p className="text-red-600">{message}</p> : null}
-
           <Button type="submit" disabled={isFormLoading}>
             {isFormLoading ? (
               <span className="flex gap-2">

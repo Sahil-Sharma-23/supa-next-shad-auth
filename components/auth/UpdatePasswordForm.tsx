@@ -15,12 +15,12 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { ServerActionReponse } from "@/types";
 import { updatePasswordFormSchema, UpdatePasswordFormType } from "@/lib/schema";
+import HookFormPasswordInput from "./HookFormPasswordInput";
 
 export default function UpdatePasswordForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const router = useRouter();
@@ -51,48 +51,7 @@ export default function UpdatePasswordForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      placeholder="Password"
-                      type={`${showPassword ? "text" : "password"}`}
-                      {...field}
-                    />
-                    <span className="absolute top-0 right-1">
-                      {showPassword ? (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <Eye className="opacity-80" />
-                        </Button>
-                      ) : (
-                        <Button
-                          type="button"
-                          size={"icon"}
-                          variant={"ghost"}
-                          className="rounded-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <EyeOff className="opacity-80" />
-                        </Button>
-                      )}
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <HookFormPasswordInput form={form} />
 
           <FormField
             control={form.control}
