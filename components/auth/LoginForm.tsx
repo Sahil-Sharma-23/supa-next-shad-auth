@@ -18,6 +18,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { ServerActionReponse } from "@/types";
+import { Link } from "next-view-transitions";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -70,7 +71,15 @@ export default function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <div className="flex justify-between items-center">
+                  <FormLabel>Password</FormLabel>
+                  <Link
+                    href={"/auth/forgot-password"}
+                    className="text-sm text-muted-foreground hover:text-primary hover:underline  duration-300 transition-all"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
                 <FormControl>
                   <div className="relative">
                     <Input
