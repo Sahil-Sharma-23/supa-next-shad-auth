@@ -23,7 +23,9 @@ export default function RegistrationEmailSentPage() {
             Click the link we sent to your inbox and verify your email address
             now!
           </p>
-          <p className="text-muted-foreground">💌 Let's get you started! 💌</p>
+          <p className="text-muted-foreground">
+            💌 Let&apos;s get you started! 💌
+          </p>
         </div>
 
         <Link href={"/"}>
