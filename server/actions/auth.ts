@@ -7,6 +7,7 @@ import {
   validatePassword,
 } from "@/lib/helpers";
 import {
+  ForgotPasswordFormType,
   LoginFormType,
   SignupFormType,
   UpdatePasswordFormType,
@@ -26,14 +27,6 @@ export async function loginAction(
       message: "Invalid email address.",
     };
   }
-  // if (!validatePassword(formData.password)) {
-  //   console.log("Invalid password"); // DEBUG
-  //   return {
-  //     statusCode: 401,
-  //     status: "NOT OK",
-  //     message: "Invalid pasword.",
-  //   };
-  // }
 
   try {
     const supabase = createClient();
@@ -50,7 +43,7 @@ export async function loginAction(
   } catch (error) {
     console.error("Unexpected error: ", error); // DEBUG
     return {
-      statusCode: 404,
+      statusCode: 500,
       status: "NOT OK",
       message: "Internal server error",
     };
@@ -116,7 +109,7 @@ export async function signUpAction(
   } catch (error) {
     console.log("Catch block caught error: ", error); // DEBUG
     return {
-      statusCode: 404,
+      statusCode: 500,
       status: "NOT OK",
       message: "Internal server error",
     };
@@ -128,24 +121,38 @@ export async function signUpAction(
   };
 }
 
-export async function resetPasswordAction(formData: FormData) {
+export async function forgotPasswordAction(
+  formData: ForgotPasswordFormType
+): Promise<ServerActionReponse> {
   console.log("Into reset password action"); // DEBUG
-  const email = formData.get("email") as string;
-
-  if (!validateEmail(email)) {
+  if (!validateEmail(formData.email)) {
     console.log("Invalid email address"); // DEBUG
+    return {
+      statusCode: 401,
+      status: "NOT OK",
+      message: "Invalid email address.",
+    };
   }
-  console.log("User email for password reset: ", email); // DEBUG
 
   try {
     const supabase = createClient();
-    // Send link through supabase to reset password
-    await supabase.auth.resetPasswordForEmail(email, {
+    // Send link to email through supabase to reset password
+    await supabase.auth.resetPasswordForEmail(formData.email, {
       redirectTo: "/auth/update-password",
     });
   } catch (error) {
-    console.log("Error: ", error);
+    console.log("Error: ", error); // DEBUG
+    return {
+      statusCode: 500,
+      status: "NOT OK",
+      message: "Internal server error",
+    };
   }
+  return {
+    message: "",
+    status: "OK",
+    statusCode: 200,
+  };
 }
 
 export async function updatePassword(
@@ -188,7 +195,7 @@ export async function updatePassword(
   } catch (error) {
     console.log("Error: ", error); // DEBUG
     return {
-      statusCode: 401,
+      statusCode: 500,
       status: "NOT OK",
       message: "Internal server error",
     };

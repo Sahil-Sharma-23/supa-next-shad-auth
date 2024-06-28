@@ -1,11 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { resetPasswordAction } from "@/server/actions/auth";
 import { Separator } from "@/components/ui/separator";
+import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm";
 
 export default function ForgotPasswordPage() {
   return (
@@ -31,21 +28,7 @@ export default function ForgotPasswordPage() {
             </p>
           </div>
           <Separator />
-          <form action={resetPasswordAction} className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Send reset link
-            </Button>
-          </form>
+          <ForgotPasswordForm />
           <div className="text-center text-sm">
             Remember your password?&nbsp;
             <Link

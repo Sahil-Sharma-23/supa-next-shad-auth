@@ -55,7 +55,7 @@ export default function LoginForm() {
             render={({ field }) => (
               <div className="flex-1 grid gap-2">
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="you@example.com" {...field} />
                   </FormControl>
