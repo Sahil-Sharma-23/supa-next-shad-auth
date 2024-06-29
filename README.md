@@ -4,9 +4,11 @@
 
 [View Vercel Demo](https://supa-next-shad-auth.vercel.app/)
 
+`NOTE: Every resource used in this project are free to use for a certain threshold.`
+
 ## 🚀 Getting Started
 
-Run the following command to create a new project with this starter.
+1. Run the following command to create a new project with this starter.
 
 ```
 yarn create next-app my-app -e https://github.com/Sahil-Sharma-23/supa-next-shad-auth
@@ -14,7 +16,11 @@ yarn create next-app my-app -e https://github.com/Sahil-Sharma-23/supa-next-shad
 npx create-next-app my-app -e https://github.com/Sahil-Sharma-23/supa-next-shad-auth
 ```
 
-Once the project and the dependencies are finished installing, you can navigate to that directory and start up the development server with:
+2. Initialize a project in Supabase. [See it how!](https://supabase.com/dashboard)
+
+3. Rename `.env.local.example` file to `.env.local` and add the `SUPABASE_URL` & `SUPABASE_ANON_KEY` generated after creating project in Supabase.
+
+4. Once the project is setup and the dependencies are finished installing, you can navigate to that directory and start up the development server with:
 
 ```
 yarn dev
