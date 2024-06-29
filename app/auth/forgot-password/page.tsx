@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
           <div className="text-center text-sm">
             Remember your password?&nbsp;
             <Link
-              href="/auth/signup"
+              href="/auth/login"
               className="hover:text-muted-foreground hover:underline duration-300 transition-all"
             >
               Login here!

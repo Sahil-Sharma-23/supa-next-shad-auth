@@ -37,7 +37,7 @@ export async function loginAction(
       return {
         statusCode: 402,
         status: "NOT OK",
-        message: "Can't login, TRY AGAIN!",
+        message: "Incorrect email or password. TRY AGAIN!",
       };
     }
   } catch (error) {
