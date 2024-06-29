@@ -1,6 +1,7 @@
 import React from "react";
 import { createClient } from "@/utils/supabase/server";
 import { Button } from "../ui/button";
+import { logoutAction } from "@/server/actions/auth";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -8,5 +9,17 @@ export default async function AuthButton() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <Button variant={"outline"}>{user ? "Logout" : "Login"}</Button>;
+  return (
+    <>
+      {user ? (
+        <form action={logoutAction}>
+          <Button type="submit" variant={"outline"}>
+            Logout
+          </Button>
+        </form>
+      ) : (
+        <Button variant={"outline"}>Not logged in!</Button>
+      )}
+    </>
+  );
 }

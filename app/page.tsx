@@ -13,18 +13,6 @@ export default function Home() {
         <Link href={"/auth/signup"}>
           <Button>Sign Up</Button>
         </Link>
-        <Link href={"/auth/forgot-password"}>
-          <Button>Forgot password</Button>
-        </Link>
-        <Link href={"/auth/registration-email-sent"}>
-          <Button>Registration email sent</Button>
-        </Link>
-        <Link href={"/auth/update-password"}>
-          <Button>Update Password</Button>
-        </Link>
-        <Link href={"/auth/protected"}>
-          <Button>Protected</Button>
-        </Link>
         <AuthButton />
         <ModeToggle />
       </div>

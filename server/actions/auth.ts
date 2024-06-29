@@ -13,6 +13,7 @@ import {
   UpdatePasswordFormType,
 } from "@/lib/schema";
 import { ServerActionReponse } from "@/types";
+import { redirect } from "next/navigation";
 
 export async function loginAction(
   formData: LoginFormType
@@ -53,6 +54,14 @@ export async function loginAction(
     status: "OK",
     message: "user logged in",
   };
+}
+
+export async function logoutAction() {
+  const supabase = createClient();
+  const { error } = await supabase.auth.signOut();
+  if (!error) {
+    redirect("/auth/login");
+  }
 }
 
 export async function signUpAction(
