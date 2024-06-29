@@ -6,6 +6,13 @@
 
 `NOTE: Every resource used in this project are free to use for a certain threshold.`
 
+## Things to keep in mind while testing 🤯.
+
+- Supabase restricts user registration. So if, you are unable to Sign up as a new user, don't worry!
+- I've provided the test Login credentials in the `.env.local.example` file. Use those to test out things!
+
+<mark>Star ⭐ this repository if you find this useful 🙂.</mark>
+
 ## 🚀 Getting Started
 
 1. Run the following command to create a new project with this starter.
@@ -38,6 +45,15 @@ This starter includes:
 2. **Supabase** _(Supabase authentication)_
 3. **ShadCN-UI**
 4. NextJS **Server Actions**
+
+## 👌 Features:
+
+- Fully responsive to all screen sizes.
+- Built with TypeScript.
+- Fully Type Safe.
+- Secure use of Server actions.
+- User friendly UI with loading states.
+- Fully customizable.
 
 ## 📚 Learn more about NextJS
 
@@ -79,8 +95,6 @@ To learn more about Tailwind CSS, take a look at the following resources:
 You can checkout [the Tailwind CSS Github Repository](https://github.com/tailwindlabs/tailwindcss) - your feedback and contributions are welcome.
 
 ## Author: Sahil Sharma (India)
-
-### Know me:
 
 - [Portfolio](https://www.sahilsharma.online) - Visit my portfolio.
 - [Github](https://github.com/Sahil-Sharma-23) - View my Github profile.
