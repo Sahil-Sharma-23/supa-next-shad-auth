@@ -37,11 +37,12 @@ export default function LoginForm() {
     const signupResponse: ServerActionReponse = await loginAction(values);
     console.log("Sign up response: ", signupResponse); // DEBUG
     if (signupResponse.statusCode === 200) {
-      router.replace("/");
+      router.replace("/auth/protected");
     } else {
       setMessage(signupResponse.message);
     }
     setIsFormLoading(false);
+    form.reset();
   }
 
   return (

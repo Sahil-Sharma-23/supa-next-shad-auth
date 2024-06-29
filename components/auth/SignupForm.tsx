@@ -45,6 +45,7 @@ export default function SignupForm() {
       setMessage(signupResponse.message);
     }
     setIsFormLoading(false);
+    form.reset();
   }
 
   return (

@@ -44,6 +44,7 @@ export default function UpdatePasswordForm() {
       setMessage(updatePasswordResponse.message);
     }
     setIsFormLoading(false);
+    form.reset();
   }
 
   return (

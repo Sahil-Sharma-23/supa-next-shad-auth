@@ -17,11 +17,14 @@ import {
 import { Input } from "../ui/input";
 import { ServerActionReponse } from "@/types";
 import SubmitButton from "./SubmitButton";
+import Image from "next/image";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function ForgotPasswordForm() {
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const router = useRouter();
+  const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
 
   const form = useForm<ForgotPasswordFormType>({
     resolver: zodResolver(forgotPasswordFormSchema),
@@ -36,38 +39,63 @@ export default function ForgotPasswordForm() {
       await forgotPasswordAction(values);
     console.log("Forgot password response: ", forgotPasswordResponse); // DEBUG
     if (forgotPasswordResponse.statusCode === 200) {
-      router.replace("/");
+      setIsEmailSent(true);
     } else {
       setMessage(forgotPasswordResponse.message);
     }
     setIsFormLoading(false);
+    form.reset();
   }
 
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <div className="flex-1 grid gap-2">
-                <FormItem>
-                  <FormLabel>Email Address</FormLabel>
-                  <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </div>
-            )}
+      {isEmailSent ? (
+        <div className="flex flex-col gap-2 items-center justify-center h-full w-full">
+          <Image
+            src={"/forgot-email-sent.svg"}
+            alt="Password reset email sent SVG icon"
+            height={100}
+            width={100}
+            className="h-20 w-20"
           />
 
-          {message ? <p className="text-red-600">{message}</p> : null}
+          <p className="text-2xl font-bold">📧 Check you Mailbox 📧</p>
 
-          <SubmitButton loading={isFormLoading} buttonTitle="Send Reset Link" />
-        </form>
-      </Form>
+          <p className="text-lg text-center text-muted-foreground">
+            An email with the link to reset your password has be sent!
+          </p>
+          <Link href={"/"}>
+            <Button>Go Back Home</Button>
+          </Link>
+        </div>
+      ) : (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <div className="flex-1 grid gap-2">
+                  <FormItem>
+                    <FormLabel>Email Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="you@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                </div>
+              )}
+            />
+
+            {message ? <p className="text-red-600">{message}</p> : null}
+
+            <SubmitButton
+              loading={isFormLoading}
+              buttonTitle="Send Reset Link"
+            />
+          </form>
+        </Form>
+      )}
     </>
   );
 }
