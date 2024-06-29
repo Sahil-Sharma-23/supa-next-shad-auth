@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="h-screen w-screen grid place-items-center">
-      <div className="space-x-4">
+      <div className="flex flex-col lg:flex-row gap-2 items-center justify-center">
         <Link href={"/auth/login"}>
           <Button>Login</Button>
         </Link>
