@@ -41,10 +41,13 @@ Open http://localhost:3000/ with your browser to see your new project!
 
 This starter includes:
 
-1. Basic **NextJS** starter
-2. **Supabase** _(Supabase authentication)_
-3. **ShadCN-UI**
-4. NextJS **Server Actions**
+1. **NextJS** starter
+2. **TypeScript**
+3. **Supabase** _(Supabase authentication)_
+4. **ShadCN-UI**
+5. NextJS **Server Actions**
+6. **Tailwind CSS**
+7. **Zod**
 
 ## 👌 Features:
 
